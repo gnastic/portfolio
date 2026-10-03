@@ -1,54 +1,662 @@
-<!-- TODO 1: Create the HTML Boilerplate -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Goran Nastic</title>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Goran Nastić, Solution Integrator</title>
+<meta name="description" content="CV of Goran Nastić, senior solution integrator for train control and passenger systems at Siemens Mobility, Prague.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,300..900&display=swap" rel="stylesheet">
+<style>
+:root{
+  --paper:#F1F4F2; --panel:#FFFFFF; --ink:#14211F; --muted:#56655F; --rule:#CBD4CF;
+  --rail:#0A7D6E; --telecom:#C2186B; --infra:#1F5FBF;
+  box-sizing:border-box;
+  padding-top:env(safe-area-inset-top,0px); padding-bottom:env(safe-area-inset-bottom,0px);
+}
+@media (prefers-color-scheme:dark){
+  :root:not([data-theme="light"]){
+    --paper:#17211F; --panel:#1F2B28; --ink:#E9EFEC; --muted:#9DADA6; --rule:#35443F;
+    --rail:#3CC2AE; --telecom:#F0609F; --infra:#6FA2F2;
+  }
+}
+:root[data-theme="dark"]{
+  --paper:#17211F; --panel:#1F2B28; --ink:#E9EFEC; --muted:#9DADA6; --rule:#35443F;
+  --rail:#3CC2AE; --telecom:#F0609F; --infra:#6FA2F2;
+}
+*,*::before,*::after{box-sizing:inherit}
+html{scroll-behavior:smooth; scroll-padding-top:calc(env(safe-area-inset-top,0px) + 4.5rem)}
+body{
+  margin:0; background:var(--paper); color:var(--ink);
+  font-family:"Archivo","Helvetica Neue",Arial,sans-serif; font-size:1.0625rem; line-height:1.55;
+  -webkit-text-size-adjust:100%;
+}
+a{color:inherit; text-underline-offset:.18em}
+a:hover{color:var(--rail)}
+:focus-visible{outline:3px solid var(--infra); outline-offset:3px; border-radius:2px}
+.wrap{max-width:68rem; margin:0 auto; padding:0 1.25rem}
+
+/* Top bar */
+.bar{
+  position:sticky; top:env(safe-area-inset-top,0px); z-index:10;
+  background:var(--paper); border-bottom:1px solid var(--rule);
+}
+.bar .wrap{display:flex; align-items:center; gap:1rem; min-height:3.5rem}
+.bar .me{font-weight:700; font-stretch:112%; text-decoration:none; white-space:nowrap}
+.bar nav{flex:1; overflow-x:auto; scrollbar-width:none}
+.bar nav::-webkit-scrollbar{display:none}
+.bar ul{display:flex; gap:1.25rem; list-style:none; margin:0; padding:0; justify-content:flex-end; white-space:nowrap}
+.bar nav a{text-decoration:none; color:var(--muted); padding:.4rem 0; display:block; border-bottom:3px solid transparent}
+.bar nav a:hover{color:var(--ink)}
+.bar nav a[aria-current="true"]{color:var(--ink); border-bottom-color:var(--rail)}
+button{font:inherit; color:inherit; cursor:pointer}
+.theme{
+  background:none; border:1px solid var(--rule); border-radius:999px; padding:.3rem .8rem; font-size:.9rem; white-space:nowrap;
+}
+.theme:hover{border-color:var(--ink)}
+
+/* Hero */
+.hero{padding:clamp(3rem,9vw,7rem) 0 clamp(2.5rem,6vw,4.5rem)}
+h1{
+  margin:0; font-weight:800; font-stretch:125%; letter-spacing:-.02em;
+  font-size:clamp(2.9rem,10.5vw,7.5rem); line-height:.92;
+}
+.hero .lede{max-width:38rem; font-size:clamp(1.15rem,2.2vw,1.4rem); line-height:1.45; margin:1.75rem 0 0}
+.hero .reach{display:flex; flex-wrap:wrap; gap:.5rem 1.75rem; margin:1.75rem 0 0; padding:0; list-style:none; font-weight:600}
+.stripes{display:flex; height:10px; margin-top:clamp(2rem,5vw,3.5rem)}
+.stripes i{display:block; transform-origin:left; animation:draw .9s cubic-bezier(.2,.7,.2,1) both}
+.stripes i:nth-child(1){flex:8; background:var(--rail)}
+.stripes i:nth-child(2){flex:9; background:var(--telecom); animation-delay:.25s}
+.stripes i:nth-child(3){flex:8; background:var(--infra); animation-delay:.5s}
+@keyframes draw{from{transform:scaleX(0)}to{transform:scaleX(1)}}
+@media (prefers-reduced-motion:reduce){.stripes i{animation:none} html{scroll-behavior:auto}}
+
+/* Sections */
+main > section{padding:clamp(2.5rem,6vw,4.5rem) 0; border-top:1px solid var(--rule)}
+h2{margin:0 0 .5rem; font-size:clamp(1.6rem,3.5vw,2.25rem); font-weight:750; font-stretch:118%; letter-spacing:-.01em; line-height:1.1}
+h3{margin:0; font-size:1.3rem; font-weight:700; font-stretch:110%; line-height:1.2}
+h4{margin:1.5rem 0 .4rem; font-size:1rem; font-weight:700}
+.intro{color:var(--muted); max-width:40rem; margin:0 0 1.75rem}
+main ul{padding-left:1.15rem; margin:.5rem 0; list-style:disc}
+main ul ul{list-style:circle}
+main li{margin:.3rem 0}
+main li::marker{color:var(--muted)}
+
+/* Line filter */
+.lines{display:flex; flex-wrap:wrap; gap:.5rem; margin:0 0 2.25rem}
+.lines button{
+  display:inline-flex; align-items:center; gap:.55rem; background:var(--panel);
+  border:1px solid var(--rule); border-radius:999px; padding:.4rem .95rem .4rem .7rem;
+}
+.lines button::before{content:""; width:1.6rem; height:6px; border-radius:3px; background:var(--c,var(--muted))}
+.lines button[aria-pressed="true"]{border-color:var(--ink); box-shadow:inset 0 0 0 1px var(--ink)}
+.c-rail{--c:var(--rail)} .c-telecom{--c:var(--telecom)} .c-infra{--c:var(--infra)}
+
+/* Career line */
+.line{list-style:none; margin:0; padding:0}
+.line > li{display:grid; grid-template-columns:9.5rem 3rem minmax(0,1fr); margin:0; transition:opacity .2s}
+.line .when{font-weight:700; font-stretch:108%; text-align:right; padding-top:.2rem; line-height:1.3}
+.track{position:relative}
+.track::before{content:""; position:absolute; left:50%; margin-left:-4px; width:8px; top:0; bottom:0; background:var(--c)}
+.track::after{
+  content:""; position:absolute; left:50%; margin-left:-12px; top:.3rem; width:24px; height:24px;
+  border-radius:50%; background:var(--paper); border:5px solid var(--ink);
+}
+.line > li:first-child .track::before{top:1rem}
+.line > li:last-child .track::before{bottom:auto; height:1rem}
+.stop{padding:0 0 3rem; max-width:44rem}
+.stop .role{margin:.25rem 0 0; font-weight:600}
+.stop .place{margin:0; color:var(--muted)}
+.stop .tag{color:var(--c); font-weight:700; font-size:.95rem; margin:0 0 .15rem}
+.line[data-filter="rail"] > li:not(.c-rail),
+.line[data-filter="telecom"] > li:not(.c-telecom),
+.line[data-filter="infra"] > li:not(.c-infra){opacity:.3}
+
+details{margin-top:.9rem}
+summary{
+  cursor:pointer; font-weight:650; width:fit-content; list-style:none;
+  border-bottom:2px solid var(--c,var(--rail)); padding-bottom:.1rem;
+}
+summary::-webkit-details-marker{display:none}
+summary::before{content:"+"; display:inline-block; width:1.1em; font-weight:700}
+details[open] > summary::before{content:"−"}
+details[open] > summary .more{display:none}
+details:not([open]) > summary .less{display:none}
+.tool{background:none; border:0; padding:0; text-decoration:underline; text-underline-offset:.18em; color:var(--muted); margin-left:auto}
+.tool:hover{color:var(--ink)}
+.row{display:flex; flex-wrap:wrap; gap:.5rem 1rem; align-items:center; margin-bottom:2.25rem}
+.row .lines{margin:0}
+
+/* Skills */
+.cols{display:grid; grid-template-columns:repeat(auto-fit,minmax(17rem,1fr)); gap:1.75rem 2.5rem}
+.cols h3{font-size:1.1rem; padding-top:.7rem; border-top:6px solid var(--c,var(--ink))}
+.table{overflow-x:auto; margin-top:2.5rem}
+table{border-collapse:collapse; width:100%; min-width:32rem}
+th,td{text-align:left; vertical-align:top; padding:.7rem 1rem .7rem 0; border-top:1px solid var(--rule)}
+th{width:11rem; font-weight:700}
+caption{text-align:left; font-weight:700; font-stretch:110%; font-size:1.1rem; padding-bottom:.6rem}
+
+/* Letters */
+.letters{display:grid; gap:2.5rem; max-width:46rem}
+.letters blockquote{margin:0; font-size:clamp(1.2rem,2.4vw,1.5rem); line-height:1.35; font-weight:500}
+.letters .who{margin:.75rem 0 0; color:var(--muted)}
+.letters .who b{color:var(--ink)}
+.letters .full p{margin:.8rem 0}
+.letters .full{max-width:40rem}
+
+/* Contact */
+.contact dl{display:grid; grid-template-columns:max-content 1fr; gap:.5rem 2rem; margin:1.25rem 0 0; font-size:1.15rem}
+.contact dt{color:var(--muted)} .contact dd{margin:0; font-weight:600; overflow-wrap:anywhere}
+footer{padding:2rem 0 3rem; color:var(--muted); font-size:.95rem; border-top:1px solid var(--rule)}
+
+@media (max-width:46rem){
+  .line > li{grid-template-columns:2.25rem minmax(0,1fr); grid-template-areas:"t w" "t s"}
+  .line .when{grid-area:w; text-align:left; padding:.25rem 0 .2rem}
+  .line .when br{display:none}
+  .track{grid-area:t}
+  .track::before,.track::after{left:12px}
+  .stop{grid-area:s}
+  .bar .me{display:none}
+  .bar ul{justify-content:flex-start}
+  th{width:8rem}
+}
+@media print{
+  .bar,.lines,.tool,.theme{display:none}
+  main > section{break-inside:auto; padding:1.5rem 0}
+}
+</style>
 </head>
 <body>
-    <h1>Goran Nastic - Portfolio</h1>
-    <h2>EMPLOYER: Siemens Mobility</h2>
-    <h3>LOCATION: Prague, Czech Republic</h3>
-    <h3>POSITION: Solution Integrator</h3>
+
+<header class="bar">
+  <div class="wrap">
+    <a class="me" href="#top">Goran Nastić</a>
+    <nav aria-label="Sections">
+      <ul>
+        <li><a href="#career">Career</a></li>
+        <li><a href="#skills">Skills</a></li>
+        <li><a href="#training">Training</a></li>
+        <li><a href="#letters">Recommendations</a></li>
+        <li><a href="#contact">Contact</a></li>
+      </ul>
+    </nav>
+    <button class="theme" type="button" id="theme" aria-label="Switch colour theme">Dark</button>
+  </div>
+</header>
+
+<main id="top">
+  <div class="wrap hero">
+    <h1>Goran<br>Nastić</h1>
+    <p class="lede">Senior solution integrator at Siemens Mobility in Prague, working on train control and passenger systems. Before rail, nine years deploying voicemail and messaging platforms for telecom operators in Europe and the US, and server and network work going back to 2001.</p>
+    <ul class="reach">
+      <li><a href="mailto:gnastic@gmail.com">gnastic@gmail.com</a></li>
+      <li><a href="tel:+381601651114">+381 60 165 1114</a></li>
+      <li>Prague, Czech Republic</li>
+    </ul>
+    <div class="stripes" aria-hidden="true"><i></i><i></i><i></i></div>
+  </div>
+
+  <section id="career">
+    <div class="wrap">
+      <h2>Career</h2>
+      <p class="intro">One route, three lines. Pick a line to highlight its stops.</p>
+      <div class="row">
+        <div class="lines" role="group" aria-label="Highlight a line">
+          <button type="button" aria-pressed="true" data-line="">All stops</button>
+          <button type="button" aria-pressed="false" data-line="rail" class="c-rail">Rail</button>
+          <button type="button" aria-pressed="false" data-line="telecom" class="c-telecom">Telecom</button>
+          <button type="button" aria-pressed="false" data-line="infra" class="c-infra">IT infrastructure</button>
+        </div>
+        <button type="button" class="tool" id="toggleAll">Open all details</button>
+      </div>
+
+      <ol class="line" id="line">
+        <li class="c-rail">
+          <div class="when">August 2018<br>to present</div>
+          <div class="track"></div>
+          <div class="stop">
+            <p class="tag">Rail</p>
+            <h3>Siemens Mobility</h3>
+            <p class="role">Senior Solution Integrator, Train Control and Passenger Systems</p>
+            <p class="place">Prague, Czech Republic</p>
+            <ul>
+              <li>Implemented cybersecurity policies and rules in compliance with ISO 27001.</li>
+              <li>Primary person responsible for the Prague Datacenter based on VMware (vCenter), including maintenance, deployments and network switch deployments for projects such as TrainITv1.</li>
+              <li>Led the migration from QlikView to Qlik Sense while working on new Business Analyst projects.</li>
+            </ul>
+            <details>
+              <summary><span class="more">All tasks</span><span class="less">Fewer tasks</span></summary>
+              <ul>
+                <li>Performed reverse engineering of Oracle databases over 10 years old.</li>
+                <li>Qlik Sense Business Analyst and Developer, specializing in big data, database management and the development of new projects.</li>
+                <li>UIPath automation expertise.</li>
+                <li>Managed migration of TrainITv1 from FreeBSD drives to VMware drives, relocating servers from rented hardware in Switzerland to the Prague Data Center (vCenter) during nighttime, ensuring uninterrupted daytime work for developers.</li>
+                <li>Deployed monitoring systems for all servers in the Prague Datacenter.</li>
+                <li>Open-source software expert, responsible for OSS clearing for future project developments.</li>
+                <li>Performed DevOps engineering tasks.</li>
+                <li>Handled migration from Jira to Redmine.</li>
+              </ul>
+            </details>
+          </div>
+        </li>
+
+        <li class="c-telecom">
+          <div class="when">January 2017<br>to August 2018</div>
+          <div class="track"></div>
+          <div class="stop">
+            <p class="tag">Telecom</p>
+            <h3>T-Mobile, Deutsche Telekom</h3>
+            <p class="role">Solution Integration Expert</p>
+            <p class="place">Prague, Czech Republic, and Bonn, Germany</p>
+            <ul>
+              <li>Developed an end-to-end test automation environment for Visual Voicemail mobile applications on Android and iOS, using Gherkin, Ruby, Appium/Selenium and Jenkins.</li>
+              <li>Created automation scenarios using Cucumber, Ruby, Appium, Selenium and other tools.</li>
+            </ul>
+            <details>
+              <summary><span class="more">All tasks</span><span class="less">Fewer tasks</span></summary>
+              <ul>
+                <li>Solution integration tasks for Deutsche Telekom.</li>
+                <li>Performed verification between telco backend systems and end-user applications, web and mobile.</li>
+                <li>Provided education and training inside T-Mobile on the functionality and operations of the existing voicemail system.</li>
+              </ul>
+            </details>
+          </div>
+        </li>
+
+        <li class="c-telecom">
+          <div class="when">June 2016<br>to January 2017</div>
+          <div class="track"></div>
+          <div class="stop">
+            <p class="tag">Telecom</p>
+            <h3>Gemalto</h3>
+            <p class="role">Solution Integrator</p>
+            <p class="place">Prague, Czech Republic</p>
+            <ul>
+              <li>Managed Over-The-Air (OTA) solutions for SIM management and maintenance.</li>
+              <li>Oversaw mobile NFC and TSM payment solution management and maintenance.</li>
+              <li>Projects for Vodafone in Italy, the UK, Hungary, Germany, Spain, Portugal and the Netherlands.</li>
+            </ul>
+          </div>
+        </li>
+
+        <li class="c-telecom">
+          <div class="when">October 2009<br>to June 2016</div>
+          <div class="track"></div>
+          <div class="stop">
+            <p class="tag">Telecom</p>
+            <h3>Acision / Xura / Mavenir</h3>
+            <p class="role">Solution Integrator Expert</p>
+            <p class="place">Czech Republic</p>
+            <ul>
+              <li>Deployed, configured, integrated and migrated large Acision voice and messaging solutions, resolving complex integration and platform issues.</li>
+              <li>Took part in technical solution design for products supporting over 3 million subscribers, including Voicemail, Call Driver, MMSC, Dialogic and third-party web-based end-user and customer care GUIs.</li>
+              <li>Projects for Belgacom, COX Communications, TeliaSonera and Tele2.</li>
+            </ul>
+            <details>
+              <summary><span class="more">All tasks and projects</span><span class="less">Fewer details</span></summary>
+              <ul>
+                <li>Installed and configured products according to customer requirements, including Sigtran and IP network configurations. Collaborated closely with third-party vendors.</li>
+                <li>Provided customer support to finalize acceptance tests and troubleshoot issues.</li>
+                <li>Supported projects during the migration and go-live phases.</li>
+                <li>Troubleshot open issues, core network and IP network problems, installed hotfixes and performed system upgrades.</li>
+              </ul>
+              <h4>Belgacom (Belgium), Voicemail</h4>
+              <ul>
+                <li>Managed the migration of voicemail systems from legacy to new solutions, deploying a highly complex setup with geographical redundancy across two sites.</li>
+                <li>Performed on-site virtual machine (VM) installation, configuration and testing.</li>
+                <li>Provided customer support during acceptance and regression testing phases.</li>
+              </ul>
+              <h4>COX Communications (United States), Voicemail</h4>
+              <ul>
+                <li>Upgraded a highly complex, redundant voicemail solution across East and West Coast sites.</li>
+                <li>Developed detailed pre-upgrade and post-upgrade methods of procedures (MOPs) and documentation.</li>
+                <li>Executed upgrades for both test and production systems, including:
+                  <ul>
+                    <li>Operating system upgrades</li>
+                    <li>Directory server (LDAP) upgrades</li>
+                    <li>Mail server upgrades</li>
+                    <li>Virtual machine platform software upgrades</li>
+                  </ul>
+                </li>
+              </ul>
+              <h4>TeliaSonera (Finland, Sweden, Estonia), Voicemail and Messaging, as leading solution integrator</h4>
+              <ul>
+                <li>Deployed and integrated Voicemail, MMSC and Call Driver solutions in both production and test environments.</li>
+                <li>Created IP plans and contributed to the development of technical solution designs.</li>
+                <li>Configured Dialogic IMG 1004 and 1010 (SIP-I/SIP, T.38), Cisco 3750, Cisco CSS 11503 load balancer and Cisco 2811 ITP (SRI-SM).</li>
+                <li>Configured EVA storage groups and vdrives.</li>
+                <li>Installed, configured and upgraded LDAP servers.</li>
+                <li>Installed and configured SIP/SIP-I Dialogic gateways/frontends, mail servers and central VM servers.</li>
+                <li>Performed acceptance testing and configured DNS (master/slave setup).</li>
+                <li>Created migration scripts and mass operation/subscriber provisioning scripts.</li>
+                <li>Troubleshot solution issues and trained customer engineers on deployed solutions.</li>
+                <li>Integrated end-user and customer care GUI solutions with voice and messaging platforms.</li>
+              </ul>
+              <h4>Tele2 (Netherlands), Voicemail upgrade</h4>
+              <ul>
+                <li>Upgraded LDAP directory servers.</li>
+                <li>Performed mail server upgrades.</li>
+                <li>Upgraded RedHat operating systems.</li>
+                <li>Conducted voicemail software upgrades.</li>
+              </ul>
+              <h4>Internal company projects</h4>
+              <ul>
+                <li>Installed backend systems in the lab environment, including Voicemail, CDRV and MMSC, for third-party companies to develop customer care GUI and end-user GUI solutions.</li>
+              </ul>
+            </details>
+          </div>
+        </li>
+
+        <li class="c-infra">
+          <div class="when">March 2007<br>to October 2009</div>
+          <div class="track"></div>
+          <div class="stop">
+            <p class="tag">IT infrastructure</p>
+            <h3>IBM GSDC</h3>
+            <p class="role">Support Engineer, Level 2/3</p>
+            <p class="place">Brno, Czech Republic</p>
+            <ul>
+              <li>AIX, Linux and Windows server solutions support.</li>
+              <li>IBM award: “Became top performer, productive and most dedicated to the job.”</li>
+            </ul>
+          </div>
+        </li>
+
+        <li class="c-infra">
+          <div class="when">2001<br>to March 2007</div>
+          <div class="track"></div>
+          <div class="stop">
+            <p class="tag">IT infrastructure</p>
+            <h3>Self-employed IT specialist</h3>
+            <p class="role">Solutions deployment and maintenance</p>
+            <p class="place">Belgrade, Serbia</p>
+            <ul>
+              <li>Worked with multiple hosting providers, responsible for the installation, configuration and maintenance of hosting services.</li>
+              <li>Configured and maintained DNS, web and mail servers, as well as Mikrotik routers.</li>
+            </ul>
+          </div>
+        </li>
+      </ol>
+
+      <h3>Education</h3>
+      <p>School of Mechanical Engineering, Department of Robotics and Flexible Systems, Belgrade.</p>
+    </div>
+  </section>
+
+  <section id="skills">
+    <div class="wrap">
+      <h2>Skills</h2>
+      <p class="intro">What I work with now, and what I have run in production over the years.</p>
+      <div class="cols">
+        <div class="c-rail">
+          <h3>Rail and security</h3>
+          <ul>
+            <li>Siemens Mobility train solutions: train control and passenger systems</li>
+            <li>ISA/IEC 62443 for operational technology in automation and control systems</li>
+            <li>ISO/IEC 27001:2022 and the 27000 series, implemented according to company requirements and framework</li>
+          </ul>
+        </div>
+        <div class="c-rail">
+          <h3>Automation and data</h3>
+          <ul>
+            <li>Python, JavaScript, NodeJS, Bash, SQL</li>
+            <li>UIPath and Python automation</li>
+            <li>Qlik Sense: dashboard migration from QlikView, script development, focus on customer requirements</li>
+          </ul>
+        </div>
+        <div class="c-infra">
+          <h3>Infrastructure and DevOps</h3>
+          <ul>
+            <li>Docker, Jenkins, Redmine, Jira and Confluence, TestLink</li>
+            <li>VMware datacenter, networking, Dell and Cisco switches</li>
+            <li>Linux servers and storage: deployment and configuration</li>
+            <li>Zabbix, Grafana, Prometheus, with notifications over SMS, MS Teams and email by alarm severity</li>
+          </ul>
+        </div>
+        <div class="c-telecom">
+          <h3>Telecom and open source</h3>
+          <ul>
+            <li>Telecommunication products and protocols, open source and proprietary</li>
+            <li>Asterisk PBX</li>
+            <li>Open-source software expert</li>
+          </ul>
+        </div>
+        <div>
+          <h3>How I work</h3>
+          <ul>
+            <li>Independent, and cooperative with the team in problem solving</li>
+            <li>Quick to adapt to new responsibilities and environments</li>
+            <li>Comfortable in the office or with remote teams</li>
+            <li>Self-organized, plans own work</li>
+            <li>Self-study from official and unofficial sources; quick learner</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="table">
+        <table>
+          <caption>Hands-on experience</caption>
+          <tbody>
+            <tr><th scope="row">Operating systems</th><td>AIX (2 years), Red Hat Linux (around 10 years), Debian-based Linux, Windows Servers (more than 10 years)</td></tr>
+            <tr><th scope="row">Hardware</th><td>HP C7000 Enclosure Systems (6 years), HP BL460cG7, GBE2c Ethernet Blade Switch configuration, HP EVA storage groups and vdrives for project system installations</td></tr>
+            <tr><th scope="row">Virtualization</th><td>VMware vSphere, KVM, Docker</td></tr>
+            <tr><th scope="row">Networking</th><td>TCP/IP, SIGTRAN, Cisco 3750 switches, Cisco ITP, Debian switches, Cisco CSS 11503 load balancers, Dialogic IMG1010 and IMG1004, Asterisk PBX SIP/IAX2: trunking between carriers across multiple countries, call encryption and dial plan creation</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <section id="training">
+    <div class="wrap">
+      <h2>Training and workshops</h2>
+      <p class="intro">Grouped by where I took them.</p>
+      <div class="cols">
+        <div class="c-rail">
+          <h3>Siemens Mobility</h3>
+          <ul>
+            <li>Electrotechnical competence training and exam under Czech Act No. 250/2021 Sb. and Government Regulation No. 194/2022 Sb. (formerly Decree 50/78 Sb.), Paragraph 50</li>
+            <li>Project management for train projects</li>
+            <li>Qlik Sense</li>
+            <li>UiPath</li>
+            <li>DevOps tools and responsibilities</li>
+            <li>Train IT</li>
+            <li>Opensource Software Expert (Erlangen)</li>
+          </ul>
+        </div>
+        <div class="c-telecom">
+          <h3>Acision</h3>
+          <ul>
+            <li>SS7, SIGTRAN, SIP</li>
+            <li>Cisco Load Balancers 11500</li>
+            <li>CCNA</li>
+            <li>RHCT, RHCE</li>
+            <li>Conflict Management</li>
+            <li>Acision Voicemail, Directory Server, CDRV and MMSC</li>
+          </ul>
+        </div>
+        <div class="c-infra">
+          <h3>IBM GSDC, Brno</h3>
+          <ul>
+            <li>Network Advanced Course</li>
+            <li>AIX Basic Course</li>
+            <li>AIX Administration I and II</li>
+            <li>Customer Satisfaction</li>
+            <li>Implementing MS Windows 2000 Clustering</li>
+            <li>Advanced Windows Server Clustering on IBM xSeries</li>
+          </ul>
+        </div>
+        <div>
+          <h3>Other</h3>
+          <ul>
+            <li>Cisco ITP</li>
+            <li>VMware vSphere</li>
+            <li>WebLogic Administration</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="letters">
+    <div class="wrap">
+      <h2>Recommendations</h2>
+      <p class="intro">From four project and line managers. Each letter opens in full.</p>
+      <div class="letters">
+
+        <article class="c-telecom">
+          <blockquote>“I have enjoyed watching the way he has grown and excelled at Acision to become one of the best System Integration engineers.”</blockquote>
+          <p class="who"><b>Gary Bate</b>, Project Manager for the TeliaSonera project, Acision. 19 May 2014</p>
+          <details>
+            <summary><span class="more">Read the full letter</span><span class="less">Close the letter</span></summary>
+            <div class="full">
+              <p>To whom it may concern</p>
+              <p>I am writing to recommend Goran Nastic. I had the pleasure of working directly with Goran during his time as the lead Engineer at Acision, and his tremendous abilities never ceased to amaze me. I was Goran’s Project Manager at Acision for the TeliaSonera Project, and during that time, we worked together closely, so I fully understand his capabilities.</p>
+              <p>Goran has an incredible adaptability to tirelessly work beyond the 9 to 5 on without being asked. His ability to continue with his duties and answer difficult Customer questions making the customer feel comfortable with him was always demonstrated. His flexibility also allows him to quickly switch tactics if the customer changes their mind about something at the last minute. A major part of the voicemail and mmsc platforms was the management and integration of Third parties for many elements of the implementation. Goran took the responsibility to liaise with the third parties to ensure the planned schedule was maintained. Without his help the Text User and Web GUI Interface elements of the implementation would have been jeopardized.</p>
+              <p>Additionally Goran is also able to work effectively with other co-workers, making him a great addition to the team. During the project Goran has made himself available onsite in Finland for months at a time away from his family. His dedication to the duty was second to none also making himself available at anytime of the day to implement changes during cutover windows, and then continuing to do a day’s work. I have enjoyed watching the way he has grown and excelled at Acision to become one of the best System Integration engineers.</p>
+              <p>With his abilities, adaptability, and dedication, Goran will make a great addition to your Company. I have no doubts you will be exceptionally pleased if you hire him.</p>
+              <p>Sincerely,<br>Gary Bate</p>
+            </div>
+          </details>
+        </article>
+
+        <article class="c-telecom">
+          <blockquote>“Goran proved himself to be a hardworking, dependable, dedicated and capable engineer.”</blockquote>
+          <p class="who"><b>Edel O’Hara, PMP</b>, Project Manager, Acision</p>
+          <details>
+            <summary><span class="more">Read the full letter</span><span class="less">Close the letter</span></summary>
+            <div class="full">
+              <p>To whom it may concern,</p>
+              <p>I have worked as a Project Manager on a high value, highly visible voicemail deployment on which Goran Nastic was a deployment engineer. Goran proved himself to be a hardworking, dependable, dedicated and capable engineer.</p>
+              <p>Goran displayed a great work ethic and a commitment to getting the job done on time. He was an extremely solid engineer who could be relied upon to take initiative and communicate results, he understood the business needs of critical tasks and worked accordingly to help complete these on schedule. Goran was thorough in his problem solving skills and a great asset to the team.</p>
+              <p>Regards,<br>Edel O’Hara PMP</p>
+            </div>
+          </details>
+        </article>
+
+        <article class="c-telecom">
+          <blockquote>“Goran is proactive as he did not need a GO from either me or the lead-engineer to act upon a customer’s question or remark.”</blockquote>
+          <p class="who"><b>Jos Joosten</b>, Senior Project Manager, Europe Operations, Acision</p>
+          <details>
+            <summary><span class="more">Read the full letter</span><span class="less">Close the letter</span></summary>
+            <div class="full">
+              <p><b>Recommendation for Goran Nastic, Voice Mail Deployment Engineer European Operations at Acision</b></p>
+              <p>Goran worked as a deployment engineer in my Voicemail project in Belgium. The project consisted in customer requirements workshops, delivery, configuration, and customer acceptance testing support for two Voice Mail systems in the Test environment and two major geo-redundant Voice Mail systems in the actual Production environment.</p>
+              <p>The project was a fixed price, fixed date project where we, as a company, were replacing a competitor Voicemail system. Accuracy, open and complete communication, and quality deliverables are prime topics in such a project.</p>
+              <p>Goran has worked together with other engineers in the project team deploying systems and supporting the customer during several test phases while fixing issues found.</p>
+              <p>One of the positive qualities of working in the team was to see Goran as an actual team player. Besides discussing topics on configuration, support, and fixes with the lead engineer it was clear there was a leveled team working. Open discussions on the topics, sometimes taking the lead, and sometimes accepting what needed to be done showed his team.</p>
+              <p>Furthermore, I was glad to see, Goran is proactive as he did not need a GO from either me or the lead-engineer to act upon a customer’s question or remark. At the same time, he kept communication open to the team showing his actions.</p>
+              <p>Communication towards the customer, project team or myself was always pleasant, both verbal and in writing. Since we are an international company with an international project team and customers it is needless to say all communication is in English. Goran’s English is very good.</p>
+              <p>Goran, you are a respected engineer, both in technical skills as in a direct open communication and in his proactiveness. I have informed you and your team manager in more than one occasion, you would be more than welcome in any of my next Voice Mail projects. Thanks for all the work done and to come.</p>
+              <p>Jos Joosten</p>
+            </div>
+          </details>
+        </article>
+
+        <article class="c-infra">
+          <blockquote>“Goran is highly intelligent and has good analytical and communication skills.”</blockquote>
+          <p class="who"><b>Domenico Diomede</b>, I.T.D. SSO Manager, IBM</p>
+          <details>
+            <summary><span class="more">Read the full letter</span><span class="less">Close the letter</span></summary>
+            <div class="full">
+              <p>It is my pleasure to recommend Goran Nastic, his performance working as a IT specialist for IBM proved that he will be a valuable addition to any company.</p>
+              <p>I have known Goran for two years in my capacity as Manager at IBM Global Services Delivery Center Czech Republic worked for me on various projects and based on his work, I would rank him very highly.</p>
+              <p>Goran is highly intelligent and has good analytical and communication skills.</p>
+              <p>If his performance in our company is a good indication of how he would perform in yours, he would be an extremely positive asset to your program.</p>
+              <p>Yours sincerely,<br>Domenico Diomede</p>
+            </div>
+          </details>
+        </article>
+
+      </div>
+    </div>
+  </section>
+
+  <section id="contact" class="contact">
+    <div class="wrap">
+      <h2>Contact</h2>
+      <dl>
+        <dt>Email</dt><dd><a href="mailto:gnastic@gmail.com">gnastic@gmail.com</a></dd>
+        <dt>Mobile</dt><dd><a href="tel:+381601651114">+381 60 165 1114</a></dd>
+        <dt>Based in</dt><dd>Prague, Czech Republic</dd>
+        <dt>Nationality</dt><dd>Serbian</dd>
+      </dl>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap">Goran Nastić. Referees’ contact details are available on request.</div>
+</footer>
+
+<script>
+(function () {
+  var root = document.documentElement;
+
+  /* Colour theme: follows the system until the visitor picks one */
+  var themeBtn = document.getElementById('theme');
+  var mq = window.matchMedia('(prefers-color-scheme: dark)');
+  function current() { return root.getAttribute('data-theme') || (mq.matches ? 'dark' : 'light'); }
+  function label() { themeBtn.textContent = current() === 'dark' ? 'Light' : 'Dark'; }
+  try {
+    var saved = localStorage.getItem('theme');
+    if (saved === 'dark' || saved === 'light') root.setAttribute('data-theme', saved);
+  } catch (e) {}
+  label();
+  themeBtn.addEventListener('click', function () {
+    var next = current() === 'dark' ? 'light' : 'dark';
+    root.setAttribute('data-theme', next);
+    try { localStorage.setItem('theme', next); } catch (e) {}
+    label();
+  });
+  if (mq.addEventListener) mq.addEventListener('change', label);
+
+  /* Highlight one line of the career route */
+  var line = document.getElementById('line');
+  var lineBtns = document.querySelectorAll('.lines button');
+  lineBtns.forEach(function (btn) {
+    btn.addEventListener('click', function () {
+      lineBtns.forEach(function (b) { b.setAttribute('aria-pressed', String(b === btn)); });
+      if (btn.dataset.line) line.setAttribute('data-filter', btn.dataset.line);
+      else line.removeAttribute('data-filter');
+    });
+  });
+
+  /* Open or close every career detail at once */
+  var allBtn = document.getElementById('toggleAll');
+  var careerDetails = line.querySelectorAll('details');
+  function syncAll() {
+    var anyClosed = Array.prototype.some.call(careerDetails, function (d) { return !d.open; });
+    allBtn.textContent = anyClosed ? 'Open all details' : 'Close all details';
+    return anyClosed;
+  }
+  allBtn.addEventListener('click', function () {
+    var open = syncAll();
+    careerDetails.forEach(function (d) { d.open = open; });
+    syncAll();
+  });
+  careerDetails.forEach(function (d) { d.addEventListener('toggle', syncAll); });
+
+  /* Mark the section being read in the top bar */
+  var links = document.querySelectorAll('.bar nav a');
+  var byId = {};
+  links.forEach(function (a) { byId[a.getAttribute('href').slice(1)] = a; });
+  if ('IntersectionObserver' in window) {
+    var io = new IntersectionObserver(function (entries) {
+      entries.forEach(function (en) {
+        if (!en.isIntersecting) return;
+        links.forEach(function (a) { a.removeAttribute('aria-current'); });
+        var a = byId[en.target.id];
+        if (a) a.setAttribute('aria-current', 'true');
+      });
+    }, { rootMargin: '-35% 0px -60% 0px' });
+    Object.keys(byId).forEach(function (id) {
+      var el = document.getElementById(id);
+      if (el) io.observe(el);
+    });
+  }
+})();
+</script>
 </body>
 </html>
-
-<!-- TODO 2: Add Your previous projects' HTML into the public folder -->
-<h2>EMPLOYER: Siemens Mobility</h2>
-<h3>LOCATION: Prague, Czech Republic</h3>
-<h3>POSITION: Solution Integrator</h3>
-
-    TASKS/ASSIGNMENTS: 
-    o Current role - Senior Solution Integrator for Train Control and Passenger 
-        Systems. 
-    o Implemented cybersecurity policies and rules in compliance with ISO 27001. 
-    o Performed reverse engineering of Oracle databases over 10 years old. 
-    o Qlik Sense Business Analyst and Developer, specializing in big data, database 
-        management, and the development of new projects. 
-    o Led migration from QlikView to Qlik Sense, while working on new Business Analyst 
-        projects. 
-    o UIPath Automation expertise. 
-    o Primary person responsible for the Prague Datacenter based on VMware (vCenter), 
-        including maintenance, deployments, and network component switch deployments to 
-        meet various project requirements, including TrainITv1. 
-    o Managed migration of TrainITv1 from FreeBSD drives to VMware drives, relocating 
-    servers from rented hardware based in Switzerland to the Prague Data Center 
-    (vCenter) during nighttime, ensuring uninterrupted daytime work for developers. 
-    o Deployed monitoring systems for all servers in the Prague Datacenter. 
-    o Open-source software expert, responsible for OSS clearing for future project 
-        developments. 
-    o Performed DevOps engineering tasks 
-    o Handled migration from Jira to Redmine. 
-
-<!-- TODO 3: Take screenshots of your project previews and add the images to the images folder -->
-
-<!-- TODO 4: Add titles/subtitles etc. -->
-
-<!-- TODO 5: Add a link to the project pages -->
-
-<!-- TODO 6: Add images to show the project previews
-HINT for TODO 6: You can use the height attribute set to 200 to make the image smaller:
-https://developer.mozilla.org/en-US/docs/Web/HTML/Element/img#attr-height -->
-
-<!-- TODO 7: Add the Contact Me and About Me page links -->
